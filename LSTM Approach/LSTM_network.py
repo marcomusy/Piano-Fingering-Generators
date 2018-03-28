@@ -32,6 +32,10 @@ def initBeam():
     one_hot = tf.placeholder("float", [None])
     _, top_2 = tf.nn.top_k(one_hot, 2)
     return one_hot, top_2
+def initArgMax():
+    one_hot = tf.placeholder("float", [1,5])
+    arg_max = tf.argmax(one_hot, 1)
+    return one_hot, arg_max
 
 def initNet(birnn=False):
     # tf Graph input

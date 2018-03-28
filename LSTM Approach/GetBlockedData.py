@@ -6,7 +6,7 @@ def main(file_path, block_length, train=True, normalizaiton=True):
         book_interval, book_finger = DataPreprocess.main(file_path, True, normalizaiton)
         book_interval = remove_interval_greater_than_12(book_interval)
         for i in range(len(book_interval)):
-            seq_input_list, seq_label_list = block_sequence_bi(book_interval[i], book_finger[i], block_length)
+            seq_input_list, seq_label_list = block_sequence(book_interval[i], book_finger[i], block_length)
             input_list += seq_input_list
             label_list += seq_label_list
     else:

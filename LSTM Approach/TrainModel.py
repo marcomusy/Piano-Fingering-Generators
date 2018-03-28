@@ -10,8 +10,8 @@ from parameters import *
 logs_path = './logs'
 writer = tf.summary.FileWriter(logs_path)
 
-input_list = pickle.load(open("../Datasets/processed/train_input_list_4_bi.pkl", "rb"))
-label_list = pickle.load(open("../Datasets/processed/train_label_list_4_bi.pkl", "rb"))
+input_list = pickle.load(open("../Datasets/processed/train_input_list_4_uni.pkl", "rb"))
+label_list = pickle.load(open("../Datasets/processed/train_label_list_4_uni.pkl", "rb"))
 
 x, y, keep_prob, pred = initNet(BIRNN)
 
@@ -73,9 +73,9 @@ with tf.Session() as session:
         step += 1
         offset += 1
     if BIRNN:
-        saver.save(session, "./models/bi_model/bi_model.ckpt")
+        saver.save(session, "./models/bi_model_4/bi_model_4.ckpt")
     else:
-        saver.save(session, "./models/mono_model/model.ckpt")
+        saver.save(session, "./models/uni_model_4/uni_model_4.ckpt")
     print("Optimization Finished!")
     print("Elapsed time: ", elapsed(time.time() - start_time))
     print("Run on command line.")
