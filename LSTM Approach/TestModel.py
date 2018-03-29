@@ -28,14 +28,15 @@ with tf.Session() as session:
     total_absFalse = 0
     total_notGood = 0
     total_interval_len = 0
+    print_finger_res = []
     for i in range(len(input_list)):
         test_interval = input_list[i]
         test_finger = label_list[i]
-        init_state = [test_finger[0], test_interval[0], test_finger[1], test_interval[1], test_finger[2], test_interval[2], test_finger[3], test_interval[3]]
+        init_state = [test_finger[0], test_interval[0], test_finger[1], test_interval[1], test_finger[2], test_interval[2], test_finger[3], test_interval[3], test_interval[4]]
         test_step = 0
         generate_step = len(test_interval)
         temp_finger_res = []
-        print_finger_res = []
+        
         while test_step < generate_step - (BLOCK_LENGTH):
             np_init_state = np.reshape(np.array(init_state), [-1, N_INPUT, 1])
             onehot_pred_test = session.run(pred, feed_dict={x: np_init_state, keep_prob: 1})
@@ -43,8 +44,6 @@ with tf.Session() as session:
             # top_2 = session.run(top_2_holder, feed_dict={onehot_holder: onehot_pred_test[0]})
             # finger_pred_first = top_2[0]+1
             # finger_pred_second = top_2[1]+1
-            
-            # finger_pred = int(tf.argmax(onehot_pred_test, 1).eval())+1
             
             finger_pred = session.run(argmax_holder, feed_dict={onehot_holder_argmax: onehot_pred_test})
             finger_pred = finger_pred[0] + 1 
